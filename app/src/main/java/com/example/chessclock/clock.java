@@ -3,7 +3,9 @@ package com.example.chessclock;
 import static java.lang.Long.valueOf;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -39,7 +41,9 @@ public class clock extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clock);
+        ConstraintLayout constraintLayout = findViewById(R.id.constraintLayout);
 
+        constraintLayout.setBackgroundColor(Color.parseColor("#F5F5F5"));
         p1 = findViewById(R.id.p1);
         p2 = findViewById(R.id.p2);
 
@@ -61,6 +65,8 @@ public class clock extends AppCompatActivity {
             minutes=5;
             increment=0;
         }
+        timeLeft_in_timer1=minutes*60000;
+        timeLeft_in_timer2=minutes*60000;
         Log.d("check mode",""+mode);
         p1.setText(Integer.toString(minutes));
         p2.setText(Integer.toString(minutes));
@@ -68,11 +74,10 @@ public class clock extends AppCompatActivity {
         timer1 = new CountDownTimer(minutes * 60000L, 1000) {
             public void onTick(long l) {
                 long seconds = (l / 1000) % 60;
-                long minutes = (l / (1000 * 60)) % 60;
-                 display1 = minutes + ":" + String.format("%02d", seconds);
-                p1.setText(display1);
-                timeLeft_in_timer1 = l;
-
+                long minutes_rn = (l / (1000 * 60)) % 60;
+                 display1 = minutes_rn + ":" + String.format("%02d", seconds);
+                    p1.setText(display1);
+                    timeLeft_in_timer1 = l;
             }
 
             public void onFinish() {
@@ -83,11 +88,10 @@ public class clock extends AppCompatActivity {
         timer2 = new CountDownTimer(minutes * 60000, 1000) {
             public void onTick(long l) {
                 long seconds = (l / 1000) % 60;
-                long minutes = (l / (1000 * 60)) % 60;
-                 display2 = minutes + ":" + String.format("%02d", seconds);
-                p2.setText(display2);
-                timeLeft_in_timer2=l;
-
+                long minutes_rn = (l / (1000 * 60)) % 60;
+                 display2 = minutes_rn + ":" + String.format("%02d", seconds);
+                    p2.setText(display2);
+                    timeLeft_in_timer2 = l;
             }
 
             public void onFinish() {
@@ -99,15 +103,18 @@ public class clock extends AppCompatActivity {
         p1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(p1.isChecked())
-                {
+                if(p1.isChecked()) {
+
+                        timeLeft_in_timer1 = timeLeft_in_timer1 + (long) increment * 1000;
+                        long seconds = (timeLeft_in_timer1 / 1000) % 60;
+                        long minutes_rn = (timeLeft_in_timer1 / (1000 * 60)) % 60;
+                        display1 = minutes_rn + ":" + String.format("%02d", seconds);
+                    Log.d("display ", display1+"display2 "+display2+"seconds "+seconds);
+
+
                     p2.setChecked(false);
                     p2.setEnabled(true);
                     p1.setEnabled(false);
-                    timeLeft_in_timer1=timeLeft_in_timer1+ (long) increment*1000;
-                    long seconds = (timeLeft_in_timer1 / 1000) % 60;
-                    long minutes = (timeLeft_in_timer1 / (1000 * 60)) % 60;
-                    display1 = minutes + ":" + String.format("%02d", seconds);
                     updateText(display1,display2);
 
                 }
@@ -116,19 +123,15 @@ public class clock extends AppCompatActivity {
 
                     timer2.start();
                     counter1++;
-                    Log.d("Clock","TIMER1 CANCELLED and timer 2 STARTED" + display1 + "     " + display2);
                     updateText(display1,display2);
-                    p1.setText(Integer.toString(minutes));
+                    Log.d("Clock","TIMER1 CANCELLED and timer 2 STARTED" + display1 + "     " + display2);
                     timer1.cancel();
                 }
                else if(p1.isChecked()&&counter1>0&&
                 !p2.isChecked())
                 {
-
                     timer1.cancel();
-
                     Log.d("clock","TIME LEFT IN TIMER"+timeLeft_in_timer2+"increment is"+increment);
-
                     Resume2(timeLeft_in_timer2);
                     Log.d("Clock","TIMER1 CANCELLED and timer 2 resumed"+display1+"     "+display2);
                 }
@@ -138,18 +141,19 @@ public class clock extends AppCompatActivity {
         p2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(p2.isChecked())
-                {
 
-                    timeLeft_in_timer2=timeLeft_in_timer2+ (long) increment*1000;
-                    long seconds = (timeLeft_in_timer2 / 1000) % 60;
-                    long minutes = (timeLeft_in_timer2 / (1000 * 60)) % 60;
-                    display2 = minutes + ":" + String.format("%02d", seconds);
-                    Log.d("display",display1);
-                    updateText(display1,display2);
+                if(p2.isChecked()) {
+                        timeLeft_in_timer2 = timeLeft_in_timer2 + (long) increment * 1000;
+                        long seconds = (timeLeft_in_timer2 / 1000) % 60;
+                        long minutes_rn = (timeLeft_in_timer2 / (1000 * 60)) % 60;
+                        display2 = minutes_rn + ":" + String.format("%02d", seconds);
+                        Log.d("display ", display1+"display2 "+display2+"seconds "+seconds);
+
                     p1.setChecked(false);
                     p1.setEnabled(true);
                     p2.setEnabled(false);
+                    updateText(display1,display2);
+
                 }
                 if(p2.isChecked()&&counter2==0)
                 {
@@ -165,7 +169,6 @@ public class clock extends AppCompatActivity {
 
                     Log.d("clock","TIME LEFT IN TIMER"+timeLeft_in_timer1+" increment is"+increment);
                     timer2.cancel();
-                    updateText(display1,display2);
                     Resume1(timeLeft_in_timer1);
                     Log.d("Clock","TIMER2 CANCELLED and timer 1 resumed"+display1+"     "+display2);
                 }

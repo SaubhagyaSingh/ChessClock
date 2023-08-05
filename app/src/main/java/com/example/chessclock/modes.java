@@ -74,7 +74,7 @@ public class modes extends AppCompatActivity {
     public void setTimer(int minutes) {
         mode=0;
         Intent intent = new Intent(this, clock.class);
-        intent.putExtra("MINUTES_EXTRAa", minutes);
+        intent.putExtra("MINUTES_EXTRA", minutes);
         intent.putExtra("mode", mode);
         startActivity(intent);
     }
