@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".modes">
 
     <TextView
@@ -63,12 +64,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/preset"
         android:layout_width="411dp"
         android:layout_height="37dp"
         android:layout_marginTop="420dp"
         android:layout_marginBottom="420dp"
         android:autoText="false"
+        android:alpha="0.5"
         android:background="#000000"
         android:inputType="text"
         android:text="Presets"
@@ -87,9 +89,12 @@
         android:layout_height="45dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="180dp"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        android:maxLength="2"
+        android:inputType="number"
         android:ems="10"
         android:hint="Minutes (5 by default)"
-        android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
@@ -101,8 +106,12 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
         android:ems="10"
+        android:inputType="number"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        android:maxLength="2"
+
         android:hint="Increment (0 by default)"
-        android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/time"
         tools:ignore="TouchTargetSizeCheck" />
@@ -142,7 +151,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/preset"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
@@ -151,7 +160,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="55dp"
         android:autoText="false"
         android:background="#000000"
         android:inputType="text"

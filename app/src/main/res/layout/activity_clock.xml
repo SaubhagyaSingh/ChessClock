@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="0.5dp"
-    android:background="#F5F5F5"
+    android:background="#000000"
     android:id="@+id/constraintLayout">
 
     tools:context=".MainActivity"><![CDATA[
@@ -36,9 +36,11 @@
         android:textOff=""
         android:textOn=""
         android:textSize="50sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <ToggleButton
         android:id="@+id/p1"
@@ -49,6 +51,7 @@
         android:textOff=""
         android:textOn=""
         android:textSize="50sp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" /><![CDATA[
