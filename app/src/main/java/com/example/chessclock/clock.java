@@ -38,6 +38,7 @@ public class clock extends AppCompatActivity {
     private String state="0";
     private int minutes;
     private int increment;
+    private int hours;
     int mode;
 
     @Override
