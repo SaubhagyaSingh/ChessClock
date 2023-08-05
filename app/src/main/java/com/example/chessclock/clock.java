@@ -5,6 +5,8 @@ import static java.lang.Long.valueOf;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Application;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -31,6 +33,7 @@ public class clock extends AppCompatActivity {
     private ToggleButton p2;
     private Button pause;
     private Button play;
+    private Button home;
     private String move_turn;
     private String state="0";
     private int minutes;
@@ -49,6 +52,7 @@ public class clock extends AppCompatActivity {
 
         pause=findViewById(R.id.pause);
         play=findViewById(R.id.play);
+        home=findViewById(R.id.home);
 
         mode=getIntent().getIntExtra("mode",1);
         if(mode==1)
@@ -207,6 +211,13 @@ public class clock extends AppCompatActivity {
                     }
                     state="0";
                 }
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), modes.class);
+                startActivity(intent);
             }
         });
     }
