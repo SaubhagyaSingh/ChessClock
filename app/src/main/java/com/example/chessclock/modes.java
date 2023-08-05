@@ -63,6 +63,13 @@ public class modes extends AppCompatActivity {
             public void onClick(View v) {
                String stime= time_set.getText().toString();
                String sincrement=increment_set.getText().toString();
+               if(stime.isEmpty())
+               {
+                   stime="5";
+               }
+               if(sincrement.isEmpty()){
+                   sincrement="0";
+               }
                int time=Integer.parseInt(stime);
                int increment=Integer.parseInt(sincrement);
                setTimer(time, increment);
