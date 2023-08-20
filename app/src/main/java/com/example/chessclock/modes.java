@@ -2,6 +2,7 @@ package com.example.chessclock;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class modes extends AppCompatActivity {
@@ -61,18 +63,38 @@ public class modes extends AppCompatActivity {
         custom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               String stime= time_set.getText().toString();
+                Context context = v.getContext();
+                String stime= time_set.getText().toString();
+
                String sincrement=increment_set.getText().toString();
                if(stime.isEmpty())
                {
                    stime="5";
                }
+               else if(stime.equals("0")||stime.equals("00"))
+               {
+                   Toast.makeText(context, "Please enter a value greater than 0 for minutes", Toast.LENGTH_SHORT).show();
+                    return;
+               }
                if(sincrement.isEmpty()){
                    sincrement="0";
                }
+
                int time=Integer.parseInt(stime);
                int increment=Integer.parseInt(sincrement);
-               setTimer(time, increment);
+                if (time < 0) {
+                    if (time < 0) {
+                        Toast.makeText(context, "Please enter a positive value for minutes", Toast.LENGTH_SHORT).show();
+                    }
+                    return;
+                }
+                if (increment < 0) {
+                    if (increment < 0) {
+                        Toast.makeText(context, "Please enter a positive value for minutes", Toast.LENGTH_SHORT).show();
+                    }
+                    return;
+                }
+                setTimer(time, increment);
             }
         });
 
